@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-const { execFile } = require("child_process");
+const { spawn } = require("child_process");
 const path = require("path");
 const os = require("os");
 
@@ -7,7 +7,6 @@ const platform = os.platform();
 const arch = os.arch(); 
 
 let bin;
-
 
 if (platform === "darwin") {
   if (arch === "arm64") {
@@ -24,14 +23,16 @@ if (platform === "darwin") {
   process.exit(1);
 }
 
-
 const args = process.argv.slice(2);
 
-execFile(bin, args, (err, stdout, stderr) => {
-  if (err) {
-    console.error(`Error running binary: ${bin}`);
-    console.error(err.message || stderr);
-    process.exit(err.code || 1);
-  }
-  process.stdout.write(stdout);
+const child = spawn(bin, args, { stdio: "inherit" });
+
+child.on("error", (err) => {
+  console.error(`Error running binary: ${bin}`);
+  console.error(err.message);
+  process.exit(1);
+});
+
+child.on("exit", (code) => {
+  process.exit(code || 0);
 });
