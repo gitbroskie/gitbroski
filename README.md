@@ -1,87 +1,71 @@
 # Git-Broski 
 
-https://gratis-neon-644.notion.site/GitBroski-Broski-for-your-Github-Workflow-286e41747653800a9cc4f7b014c6cf51
-
 **Broski for your Git!**  
 A CLI tool to perform various manual tasks with single commands
 
 ## Installation
-This section guides you through setting up gitbroski locally.
 
 ### Prerequisites
-1. Ensure Node.js is installed and configured on your system.
+- Go 1.22+ installed
 
-### Local Setup
-Install the tool globally using npm by running the following command in your terminal:
+### Setup
 ```bash
-npm install -g gitbroski
+# Clone the repo
+git clone https://github.com/gitbroskie/gitbroski.git
+cd gitbroski
+
+# Build
+go build -o gitbroski ./cmd
+
+# Create symlink for global access
+sudo ln -s $(pwd)/gitbroski /usr/local/bin/gitbroski
 ```
+
+Now you can run `gitbroski` from anywhere.
+
 ## Usage
-Here are the key commands for gitbroski to enhance your Git workflow:
 
-#### 1. Open the Remote Repository
-
-Quickly jump from your command line to the GitHub or GitLab page for your current project.
+### Open Remote Repository
+Jump from terminal to your GitHub/GitLab repo page:
 ```bash
 gitbroski open
 ```
-#### 2. Auto-Generate .gitignore
-Effortlessly create a .gitignore file based on a specified language or technology.
+
+### Auto-Generate .gitignore
+Create a .gitignore file for your project:
 ```bash
-gitbroski ignore <Language>
+gitbroski ignore <language>
 ```
-Currently, this command supports:
-- python
-- (Issues are open to add support for node.js, golang, and many more languages!)
+Supported: `python` (more coming soon)
 
-#### 3. Easy Empty Commit
-Create an empty Git commit (useful for triggering CI/CD pipelines without code changes) and add an optional message.
+### Empty Commit
+Trigger CI/CD without code changes:
 ```bash
-gitbroski empty commit <your-Message>
-```
-
-
-## Installation (Local setup)
-
-### 1. Clone the Repository
-```bash
-git clone https://github.com/your-username/gitbroski.git
-cd gitbroski
+gitbroski empty commit <message>
 ```
 
-### 2. Install Dependencies
+### MR/PR Manager
+Save and manage your merge requests:
 ```bash
-go mod tidy
+# Save an MR/PR
+gitbroski mr save <url>
+
+# List saved MRs (interactive)
+gitbroski mr list
 ```
 
-### 3. Build the Project
-```bash
-go build -o gitbroski ./cmd
-```
+In the list view:
+- `↑/↓` navigate
+- `enter` open in browser
+- `d` delete
+- `h` auth help
+- `q` quit
 
-### 4. (Optional) Create a Symlink for Global Use
-```bash
-sudo ln -s /full/path/to/gitbroski /usr/local/bin/gitbroski
-```
-> This allows you to run `gitbroski` from **any directory**.
-
-- Opens the **current Git repository** in your default browser.
-
-## Contribution Guide
-1. **Fork** and **clone** the repository.
-2. Install dependencies:
-```bash
-go mod tidy
-```
-3. Build the project:
-```bash
-go build -o gitbroski ./cmd
-```
-4. Create a symlink for global use (optional):
-```bash
-sudo ln -s /full/path/to/gitbroski /usr/local/bin/gitbroski
-```
-5. Run `gitbroski` from **any folder** and contribute!
+## Contributing
+1. Fork and clone
+2. `go mod tidy`
+3. `go build -o gitbroski ./cmd`
+4. Make changes and submit a PR
 
 ## License
 MIT
