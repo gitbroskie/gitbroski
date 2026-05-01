@@ -68,3 +68,5 @@ tmp/
 # config.yaml
 
 gitbroski
+
+*.tgz
