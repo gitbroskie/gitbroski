@@ -2,7 +2,7 @@
   "name": "gitbroski",
   "version": "1.4.4",
   "bin": {
-    "gitbroski": "./index.js"
+    "gitbroski": "index.js"
   },
   "files": [
     "bin/",

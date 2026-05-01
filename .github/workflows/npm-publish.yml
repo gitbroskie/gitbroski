@@ -15,6 +15,7 @@ jobs:
   publish:
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
+    environment: release
 
     steps:
       - uses: actions/checkout@v4
@@ -35,9 +36,14 @@ jobs:
       - name: Make executables
         run: chmod +x bin/*
 
-      - name: Publish to npm
+      - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 24
           registry-url: 'https://registry.npmjs.org/'
-      - run: npm publish
+    
+      - name: Ensure latest npm
+        run: npm install -g npm@latest
+
+      - name: Publish to npm
+        run: npm publish --access public
