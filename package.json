@@ -4,6 +4,10 @@
   "bin": {
     "gitbroski": "index.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gitbroskie/gitbroski"
+  },
   "files": [
     "bin/",
     "index.js",
